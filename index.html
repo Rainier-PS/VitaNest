@@ -5,6 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VitaNest</title>
+  <meta name="description" content="VitaNest - Tech for Wellness, Equity for All. Bridging advanced technology & elderly accessibility with AI, cognitive training, and smart hardware." />
+  <meta name="keywords" content="VitaNest, Elderly Wellness, AI Pose Detection, Cognitive Training, Smart Hardware, Fall Prevention, Arduino Uno, PictoBlox" />
+  <meta name="author" content="Rainier Pearson Saputra, Aflah Berlian Darmanta, I Gede Made Kenan Putra Dharma" />
+  <meta property="og:title" content="VitaNest | Tech for Wellness, Equity for All" />
+  <meta property="og:description" content="Bridging advanced technology & elderly accessibility with AI, cognitive training, and smart hardware." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/Rainier-PS/Vitanest/main/images/LOGO.svg" />
+  <meta property="og:url" content="https://rainier-ps.github.io/Vitanest/" />
+  <meta property="og:type" content="website" />
+  <meta name="google-site-verification" content="YOUR_GOOGLE_SITE_VERIFICATION_CODE_HERE" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -550,7 +559,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 500;
-      width: calc(100% - 48px);
+      width: calc(100% - 56px);
       max-width: 1200px;
       transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
@@ -695,12 +704,72 @@
     }
 
     @media (max-width: 768px) {
+      #navbar.scrolled {
+        max-width: none !important;
+      }
+
+      #navbar {
+        box-sizing: border-box !important;
+        left: 20px !important;
+        right: auto !important;
+        width: calc(100% - 40px) !important;
+        max-width: none !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        overflow-x: hidden !important;
+      }
+
+      #navbar .nav-inner,
+      #navbar .nav-logo,
+      #navbar .nav-links,
+      #navbar .nav-links li,
+      #navbar .nav-links li a,
+      #navbar .theme-toggle {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      #navbar.menu-open .nav-links li a::after {
+        display: none;
+      }
+
+      .nav-inner {
+        background: var(--nav-island-bg) !important;
+        backdrop-filter: blur(20px) saturate(1.6) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.6) !important;
+        border-color: var(--border-hover) !important;
+        padding: 10px 20px !important;
+        border-radius: 99px !important;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        transition: none !important;
+        animation: none !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+
+      .nav-logo {
+        font-size: 0.875rem !important;
+        flex-shrink: 0;
+      }
+
+      .nav-right {
+        flex-shrink: 0;
+      }
+
       .nav-links {
         display: none;
       }
 
       .nav-menu-btn {
         display: flex;
+      }
+
+      /* Only burger lines keep a short transition */
+      #navbar .nav-menu-btn span {
+        transition: opacity 0.3s, background 0.3s !important;
       }
 
       #navbar.menu-open .nav-links {
@@ -710,6 +779,7 @@
         top: 100%;
         left: 0;
         right: 0;
+        animation: none !important;
         background: var(--nav-island-bg);
         backdrop-filter: blur(20px) saturate(1.6);
         -webkit-backdrop-filter: blur(20px) saturate(1.6);
@@ -735,30 +805,6 @@
         border-radius: 12px;
         border-bottom: none;
         position: relative;
-        overflow: hidden;
-      }
-
-      #navbar.menu-open .nav-links li a::after {
-        content: '';
-        position: absolute;
-        top: var(--y, 50%);
-        left: var(--x, 50%);
-        width: 120px;
-        height: 120px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s;
-        z-index: -1;
-      }
-
-      [data-theme="light"] #navbar.menu-open .nav-links li a::after {
-        background: radial-gradient(circle, rgba(0, 0, 0, 0.08) 0%, transparent 60%);
-      }
-
-      #navbar.menu-open .nav-links li a:hover::after {
-        opacity: 1;
       }
 
       #navbar.menu-open .nav-menu-btn span {
@@ -1985,13 +2031,19 @@
     }
 
     .lightbox-overlay img {
-      max-width: 90vw;
+      max-width: calc(100vw - 56px);
       max-height: 90vh;
       object-fit: contain;
       border-radius: 12px;
       transform: scale(0.95);
       transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 640px) {
+      .lightbox-overlay img {
+        max-width: calc(100vw - 40px);
+      }
     }
 
     .lightbox-overlay.active img {
@@ -2930,15 +2982,26 @@
     const $nav = document.getElementById('navbar');
     let ticking = false;
 
+    const NAV_SCROLL_BREAKPOINT_PX = 768;
+
+    function updateNavScrolled() {
+      const isMobileNav = window.innerWidth <= NAV_SCROLL_BREAKPOINT_PX;
+      $nav.classList.toggle('scrolled', !isMobileNav && window.scrollY > 60);
+    }
+
     window.addEventListener('scroll', () => {
+      if (window.innerWidth <= NAV_SCROLL_BREAKPOINT_PX) return;
       if (!ticking) {
         requestAnimationFrame(() => {
-          $nav.classList.toggle('scrolled', window.scrollY > 60);
+          updateNavScrolled();
           ticking = false;
         });
         ticking = true;
       }
     }, { passive: true });
+
+    window.addEventListener('resize', updateNavScrolled, { passive: true });
+    updateNavScrolled();
 
     const sections = document.querySelectorAll('section[id]');
     const navAs = document.querySelectorAll('.nav-links a');
@@ -3144,9 +3207,9 @@
     });
 
     let ctaTl = gsap.timeline({
-      scrollTrigger: { trigger: '.cta-box', start: 'top 100%', end: 'top 40%', scrub: 1 }
+      scrollTrigger: { trigger: '.cta-box', start: 'top 95%', end: 'bottom bottom', scrub: 1 }
     });
-    ctaTl.fromTo('.cta-box', { scale: 0.2, y: 150, opacity: 0 }, { scale: 1.15, y: -20, opacity: 1, duration: 0.7 })
+    ctaTl.fromTo('.cta-box', { scale: 0.8, y: 60, opacity: 0 }, { scale: 1.02, y: -5, opacity: 1, duration: 0.7 })
       .to('.cta-box', { scale: 1, y: 0, duration: 0.3 });
 
     const accItems = document.querySelectorAll('.accordion-item');
@@ -3297,15 +3360,17 @@
       }
     });
 
-    document.querySelectorAll('#navbar .nav-links li a').forEach(a => {
-      a.addEventListener('mousemove', e => {
-        const rect = a.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        a.style.setProperty('--x', `${x}px`);
-        a.style.setProperty('--y', `${y}px`);
+    if (window.innerWidth > NAV_SCROLL_BREAKPOINT_PX) {
+      document.querySelectorAll('#navbar .nav-links li a').forEach(a => {
+        a.addEventListener('mousemove', e => {
+          const rect = a.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          a.style.setProperty('--x', `${x}px`);
+          a.style.setProperty('--y', `${y}px`);
+        });
       });
-    });
+    }
 
   </script>
 </body>
