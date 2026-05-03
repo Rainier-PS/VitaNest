@@ -5,11 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VitaNest</title>
-  <meta name="description" content="VitaNest - Tech for Wellness, Equity for All. Bridging advanced technology & elderly accessibility with AI, cognitive training, and smart hardware." />
-  <meta name="keywords" content="VitaNest, Elderly Wellness, AI Pose Detection, Cognitive Training, Smart Hardware, Fall Prevention, Arduino Uno, PictoBlox" />
+  <meta name="description"
+    content="VitaNest - Tech for Wellness, Equity for All. Bridging advanced technology & elderly accessibility with AI, cognitive training, and smart hardware." />
+  <meta name="keywords"
+    content="VitaNest, Elderly Wellness, AI Pose Detection, Cognitive Training, Smart Hardware, Fall Prevention, Arduino Uno, PictoBlox" />
   <meta name="author" content="Rainier Pearson Saputra, Aflah Berlian Darmanta, I Gede Made Kenan Putra Dharma" />
   <meta property="og:title" content="VitaNest | Tech for Wellness, Equity for All" />
-  <meta property="og:description" content="Bridging advanced technology & elderly accessibility with AI, cognitive training, and smart hardware." />
+  <meta property="og:description"
+    content="Bridging advanced technology & elderly accessibility with AI, cognitive training, and smart hardware." />
   <meta property="og:image" content="https://raw.githubusercontent.com/Rainier-PS/Vitanest/main/images/LOGO.svg" />
   <meta property="og:url" content="https://rainier-ps.github.io/Vitanest/" />
   <meta property="og:type" content="website" />
@@ -703,35 +706,32 @@
       transition: opacity 0.3s, background 0.3s;
     }
 
-    @media (max-width: 768px) {
-      #navbar.scrolled {
-        max-width: none !important;
-      }
-
+    @media (max-width: 1024px) {
       #navbar {
-        box-sizing: border-box !important;
-        left: 20px !important;
-        right: auto !important;
+        left: 50% !important;
         width: calc(100% - 40px) !important;
-        max-width: none !important;
-        transform: none !important;
+        max-width: 780px !important;
+        transform: translateX(-50%) !important;
         transition: none !important;
-        animation: none !important;
-        overflow-x: hidden !important;
       }
 
-      #navbar .nav-inner,
-      #navbar .nav-logo,
-      #navbar .nav-links,
-      #navbar .nav-links li,
-      #navbar .nav-links li a,
-      #navbar .theme-toggle {
+      #navbar.scrolled {
+        max-width: 780px !important;
         transition: none !important;
-        animation: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #navbar {
+        top: 12px !important;
+        width: calc(100% - 40px) !important;
+        max-width: calc(100% - 40px) !important;
+        transition: none !important;
       }
 
-      #navbar.menu-open .nav-links li a::after {
-        display: none;
+      #navbar.scrolled {
+        max-width: calc(100% - 40px) !important;
+        transition: none !important;
       }
 
       .nav-inner {
@@ -743,20 +743,10 @@
         border-radius: 99px !important;
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.1) !important;
         transition: none !important;
-        animation: none !important;
-        box-sizing: border-box !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
       }
 
       .nav-logo {
         font-size: 0.875rem !important;
-        flex-shrink: 0;
-      }
-
-      .nav-right {
-        flex-shrink: 0;
       }
 
       .nav-links {
@@ -767,11 +757,6 @@
         display: flex;
       }
 
-      /* Only burger lines keep a short transition */
-      #navbar .nav-menu-btn span {
-        transition: opacity 0.3s, background 0.3s !important;
-      }
-
       #navbar.menu-open .nav-links {
         display: flex;
         flex-direction: column;
@@ -779,7 +764,6 @@
         top: 100%;
         left: 0;
         right: 0;
-        animation: none !important;
         background: var(--nav-island-bg);
         backdrop-filter: blur(20px) saturate(1.6);
         -webkit-backdrop-filter: blur(20px) saturate(1.6);
@@ -805,6 +789,30 @@
         border-radius: 12px;
         border-bottom: none;
         position: relative;
+        overflow: hidden;
+      }
+
+      #navbar.menu-open .nav-links li a::after {
+        content: '';
+        position: absolute;
+        top: var(--y, 50%);
+        left: var(--x, 50%);
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: -1;
+      }
+
+      [data-theme="light"] #navbar.menu-open .nav-links li a::after {
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.08) 0%, transparent 60%);
+      }
+
+      #navbar.menu-open .nav-links li a:hover::after {
+        opacity: 1;
       }
 
       #navbar.menu-open .nav-menu-btn span {
@@ -1708,7 +1716,6 @@
       }
     }
 
-    /* --- Shared Fluid Button Hover Animation --- */
     .btn-outline,
     .hero-cta,
     .cta-link {
@@ -1783,8 +1790,6 @@
       transform: translateY(-3px) translateZ(0);
       box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.3);
     }
-
-    /* ------------------------------------------ */
 
     footer {
       padding: 28px 0;
@@ -1876,14 +1881,12 @@
       background: #3b82f6;
     }
 
-    /* View Transitions for Theme Toggle */
     ::view-transition-old(root),
     ::view-transition-new(root) {
       animation: none;
       mix-blend-mode: normal;
     }
 
-    /* Ecosystem Accordion Layout */
     .ecosystem-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -2008,7 +2011,6 @@
       visibility: visible;
     }
 
-    /* Lightbox Styles */
     .lightbox-overlay {
       position: fixed;
       inset: 0;
@@ -2344,16 +2346,36 @@
         <div class="about-grid" style="margin-bottom: 40px;">
           <div class="about-card">
             <h3 class="about-card-title">The Problem</h3>
-            <p>Many elderly individuals face serious health and safety challenges as they age. One major issue is cognitive decline. According to the World Health Organization, 57 million people worldwide were living with dementia in 2021, with nearly 10 million new cases every year<sup><a href="#ref-1" style="color: var(--sb-thumb-mid); text-decoration: none;">[1]</a></sup>. Dementia affects memory, decision-making, and daily functioning, making it difficult for elderly individuals to remember important routines such as taking medication.</p>
-            <p>Another major challenge is physical decline and fall risk. Research shows that 28–35% of adults over 65 experience falls every year, often due to declining balance, muscle strength, and coordination<sup><a href="#ref-2" style="color: var(--sb-thumb-mid); text-decoration: none;">[2]</a></sup>. Additionally, many seniors struggle with loneliness and lack of mental stimulation, which can accelerate cognitive deterioration<sup><a href="#ref-5" style="color: var(--sb-thumb-mid); text-decoration: none;">[5]</a></sup>.</p>
-            <p>While many health apps exist, they are often designed for younger users and are too complicated or fragmented for elderly individuals, forcing them to manage multiple apps and devices. These challenges not only affect elderly individuals but also create emotional and financial burdens for families and caregivers.</p>
+            <p>Many elderly individuals face serious health and safety challenges as they age. One major issue is
+              cognitive decline. According to the World Health Organization, 57 million people worldwide were living
+              with dementia in 2021, with nearly 10 million new cases every year<sup><a href="#ref-1"
+                  style="color: var(--sb-thumb-mid); text-decoration: none;">[1]</a></sup>. Dementia affects memory,
+              decision-making, and daily functioning, making it difficult for elderly individuals to remember important
+              routines such as taking medication.</p>
+            <p>Another major challenge is physical decline and fall risk. Research shows that 28–35% of adults over 65
+              experience falls every year, often due to declining balance, muscle strength, and coordination<sup><a
+                  href="#ref-2" style="color: var(--sb-thumb-mid); text-decoration: none;">[2]</a></sup>. Additionally,
+              many seniors struggle with loneliness and lack of mental stimulation, which can accelerate cognitive
+              deterioration<sup><a href="#ref-5"
+                  style="color: var(--sb-thumb-mid); text-decoration: none;">[5]</a></sup>.</p>
+            <p>While many health apps exist, they are often designed for younger users and are too complicated or
+              fragmented for elderly individuals, forcing them to manage multiple apps and devices. These challenges not
+              only affect elderly individuals but also create emotional and financial burdens for families and
+              caregivers.</p>
           </div>
 
           <div class="about-card">
             <h3 class="about-card-title">Why We Chose This Theme</h3>
-            <p>Technology has the potential to significantly improve quality of life, yet many elderly individuals remain underserved by modern digital solutions. Most existing technologies are designed with younger users in mind, often overlooking the accessibility needs and daily challenges faced by older adults.</p>
-            <p>At the same time, the global elderly population is rapidly increasing, creating a growing need for solutions that support healthy aging, independence, and safety. Addressing these challenges requires inclusive technologies that are both powerful and easy to use. For this reason, we chose the theme “Tech for Wellness, Equity for All.”</p>
-            <p>By designing VitaNest around accessibility, simplicity, and wellness, we aim to demonstrate how artificial intelligence and smart technology can be used to create inclusive health solutions that empower elderly individuals to live safer, healthier, and more independent lives.</p>
+            <p>Technology has the potential to significantly improve quality of life, yet many elderly individuals
+              remain underserved by modern digital solutions. Most existing technologies are designed with younger users
+              in mind, often overlooking the accessibility needs and daily challenges faced by older adults.</p>
+            <p>At the same time, the global elderly population is rapidly increasing, creating a growing need for
+              solutions that support healthy aging, independence, and safety. Addressing these challenges requires
+              inclusive technologies that are both powerful and easy to use. For this reason, we chose the theme "Tech
+              for Wellness, Equity for All."</p>
+            <p>By designing VitaNest around accessibility, simplicity, and wellness, we aim to demonstrate how
+              artificial intelligence and smart technology can be used to create inclusive health solutions that empower
+              elderly individuals to live safer, healthier, and more independent lives.</p>
           </div>
         </div>
 
@@ -2990,7 +3012,6 @@
     }
 
     window.addEventListener('scroll', () => {
-      if (window.innerWidth <= NAV_SCROLL_BREAKPOINT_PX) return;
       if (!ticking) {
         requestAnimationFrame(() => {
           updateNavScrolled();
@@ -3360,17 +3381,15 @@
       }
     });
 
-    if (window.innerWidth > NAV_SCROLL_BREAKPOINT_PX) {
-      document.querySelectorAll('#navbar .nav-links li a').forEach(a => {
-        a.addEventListener('mousemove', e => {
-          const rect = a.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          a.style.setProperty('--x', `${x}px`);
-          a.style.setProperty('--y', `${y}px`);
-        });
+    document.querySelectorAll('#navbar .nav-links li a').forEach(a => {
+      a.addEventListener('mousemove', e => {
+        const rect = a.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        a.style.setProperty('--x', `${x}px`);
+        a.style.setProperty('--y', `${y}px`);
       });
-    }
+    });
 
   </script>
 </body>
