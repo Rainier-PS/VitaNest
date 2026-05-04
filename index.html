@@ -2905,7 +2905,7 @@
           </h2>
         </div>
 
-        <a class="cta-link" href="#">
+        <a class="cta-link" href="https://pictoblox.page.link/aTmE14jirTGzibET8">
           <span>Download PictoBlox Project</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" aria-hidden="true">
@@ -3042,7 +3042,7 @@
             clipPath: clipPath,
           },
           {
-            duration: 900,
+            duration: 650,
             easing: 'ease-in-out',
             pseudoElement: '::view-transition-new(root)',
           }
@@ -3204,7 +3204,7 @@
 
     gsap.utils.toArray('.section-title, .cta-title').forEach(title => {
       gsap.from(title.querySelectorAll('.char'), {
-        scrollTrigger: { trigger: title, start: 'top 95%', end: 'top 60%', scrub: 1 },
+        scrollTrigger: { trigger: title, start: 'top 95%', end: 'top 80%', scrub: 1 },
         y: 80,
         opacity: 0,
         scale: 0.5,
@@ -3278,7 +3278,7 @@
     });
 
     let ctaTl = gsap.timeline({
-      scrollTrigger: { trigger: '.cta-box', start: 'top 95%', end: 'bottom bottom', scrub: 1 }
+      scrollTrigger: { trigger: '.cta-box', start: 'top 95%', end: 'top 65%', scrub: 1 }
     });
     ctaTl.fromTo('.cta-box', { scale: 0.8, y: 60, opacity: 0 }, { scale: 1.02, y: -5, opacity: 1, duration: 0.7 })
       .to('.cta-box', { scale: 1, y: 0, duration: 0.3 });
