@@ -242,19 +242,165 @@
       });
     });
 
-    gsap.from('#aboutHeading p', {
-      scrollTrigger: { trigger: '#about', start: 'top 100%', end: 'top 40%', scrub: 1 },
-      y: 120,
-      scale: 0.8,
+    gsap.from('#about .about-theme-card p', {
+      scrollTrigger: { trigger: '#about .about-theme-card', start: 'top 100%', end: 'top 62%', scrub: 1 },
+      y: 100,
+      scale: 0.94,
       opacity: 0,
-      filter: 'blur(24px)',
-      stagger: 0.2
+      filter: 'blur(20px)',
+      stagger: 0.12,
     });
 
-    gsap.from('.project-card', {
-      scrollTrigger: { trigger: '#projectsGrid', start: 'top 100%', end: 'top 40%', scrub: 1 },
-      y: 150, skewY: 5, opacity: 0, stagger: 0.15
-    });
+    if (!reduceMotion) {
+      document.querySelectorAll('.ps-motion').forEach((row, idx) => {
+        const phaseProblem = row.classList.contains('ps-motion-problem');
+        const copy = row.querySelector('.ps-copy');
+        const media = row.querySelector('.ps-media');
+
+        const twist = idx % 2 === 0 ? 8 : -8;
+        const floatY = phaseProblem ? 28 + (idx % 3) * 6 : 22 + (idx % 2) * 8;
+
+        if (copy) {
+          gsap.fromTo(copy, {
+            x: phaseProblem ? -90 : 92,
+            y: floatY,
+            rotateY: (phaseProblem ? -1 : 1) * twist,
+            scale: phaseProblem ? 0.94 : 0.93,
+            opacity: 0.08,
+            filter: phaseProblem ? 'blur(22px)' : 'blur(18px)',
+          }, {
+            x: 0,
+            y: 0,
+            rotateY: 0,
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: row,
+              start: 'top 92%',
+              end: 'top 52%',
+              scrub: 1.15,
+            },
+          });
+        }
+
+        if (media) {
+          gsap.fromTo(media, {
+            x: phaseProblem ? 88 : -88,
+            y: phaseProblem ? -18 : 20,
+            rotateY: phaseProblem ? twist * -0.85 : twist * 0.85,
+            scale: phaseProblem ? 0.84 : 0.86,
+            opacity: 0.06,
+            clipPath: phaseProblem ? 'inset(0 12% 0 12% round 22px)' : 'inset(10% 0 10% 0 round 22px)',
+          }, {
+            x: 0,
+            y: 0,
+            rotateY: 0,
+            scale: 1,
+            opacity: 1,
+            clipPath: 'inset(0% 0% 0% 0% round 22px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: row,
+              start: 'top 92%',
+              end: 'top 52%',
+              scrub: 1.15,
+            },
+          });
+        }
+      });
+
+      gsap.utils.toArray('.ps-stage').forEach((stage, si) => {
+        gsap.fromTo(stage, {
+          y: si % 2 === 0 ? 48 : 36,
+          rotateZ: si % 2 === 0 ? -0.4 : 0.35,
+        }, {
+          y: 0,
+          rotateZ: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: stage,
+            start: 'top 98%',
+            end: 'center 72%',
+            scrub: 1.2,
+          },
+        });
+      });
+    }
+
+    if (!reduceMotion) {
+      const sdgWrap = document.getElementById('sdgShowcase');
+      if (sdgWrap) {
+        gsap.fromTo(sdgWrap, {
+          clipPath: 'inset(10% 8% 10% 8% round 28px)',
+          y: 80,
+          opacity: 0.18,
+          rotateX: 8,
+        }, {
+          clipPath: 'inset(0% 0% 0% 0% round 28px)',
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sdgWrap,
+            start: 'top 94%',
+            end: 'top 54%',
+            scrub: 1.2,
+          }
+        });
+
+        gsap.to('.sdg-orbit-left', {
+          rotation: 220,
+          x: 26,
+          y: -18,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sdgWrap,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.6,
+          }
+        });
+
+        gsap.to('.sdg-orbit-right', {
+          rotation: -200,
+          x: -22,
+          y: 20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sdgWrap,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.6,
+          }
+        });
+
+        gsap.utils.toArray('.sdg-pillar').forEach((pillar, i) => {
+          gsap.fromTo(pillar, {
+            y: 68 + (i * 10),
+            opacity: 0.1,
+            rotateY: i === 1 ? 0 : (i % 2 === 0 ? -18 : 18),
+            filter: 'blur(10px)',
+          }, {
+            y: 0,
+            opacity: 1,
+            rotateY: 0,
+            filter: 'blur(0px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: sdgWrap,
+              start: 'top 82%',
+              end: 'top 42%',
+              scrub: 1.1,
+            }
+          });
+        });
+      }
+    } else {
+      gsap.set('.sdg-showcase, .sdg-pillar', { clearProps: 'all' });
+    }
     gsap.from('.accordion-item', {
       scrollTrigger: { trigger: '#ecoAccordion', start: 'top 100%', end: 'top 50%', scrub: 1 },
       x: 100, opacity: 0, stagger: 0.1
@@ -468,4 +614,3 @@
         a.style.setProperty('--y', `${y}px`);
       });
     });
-
